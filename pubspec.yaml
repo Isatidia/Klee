@@ -1,0 +1,43 @@
+name: Klee
+description: 民大应用聚合软件
+
+publish_to: 'none'
+
+version: 0.1.0-Dome
+
+environment:
+  sdk: '>=3.1.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.1.0
+  dio: ^5.3.3
+  shared_preferences: ^2.2.2
+  qr_flutter: ^4.1.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  url_launcher: ^6.2.0
+  timelines: ^0.1.0
+  convert: ^3.1.1
+  intl: ^0.18.1
+  table_calendar: ^3.0.9
+  folding_cell: ^1.0.2
+  motion_toast: ^2.7.9
+  fluttertoast: ^8.2.2
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  assets:
+  - images/100.png
+  - images/limobao.png
+  - images/sasa!.gif
+  - images/mona-loading-default.gif
+  uses-material-design: true
+
+
