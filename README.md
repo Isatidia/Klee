@@ -25,7 +25,7 @@
 #### 民大一点通
  - 验证码登录
 #### 民大青年
- - 我的报名-已报名活动
+ - 我的报名-已报名活动状态
  - 我的签到-已签到活动状态
  - 我的课程-中华文化大课堂
 #### 民大教务：
@@ -60,7 +60,7 @@
 
 本项目仍在持续开发中, 以下屏幕截图可能并非来自最新版本
 ### 手机
-
+<img src="screenshots/1.jpg" style="width: 200px"><img src="screenshots/2.jpg" style="width: 200px"><img src="screenshots/3.jpg" style="width: 200px"><img src="screenshots/4.jpg" style="width: 150px"><img src="screenshots/5.jpg" style="width: 150px">
 ## 已知问题
  - 在登录界面登录成功后，由于继承了父组件的属性，返回主页会自动唤起键盘
  - 启动应用有概率长时间白屏，如无法使用，请联系作者
