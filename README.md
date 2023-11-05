@@ -6,7 +6,9 @@
 
 后端依赖于民大一点通，民大青年，[api.isatidis.top](https://github.com/Isatidia/Klee-3DES)
 
-目前支持Android，Windows端;其他端暂未验证可用性
+请使用民大一点通账号登录
+
+目前支持Android，Windows端；其他端暂未验证可用性
 
 欢迎提出问题和功能建议
 
