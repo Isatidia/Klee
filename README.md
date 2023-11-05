@@ -3,7 +3,8 @@
 [![flutter](https://img.shields.io/badge/flutter-3.13.9-blue)](https://flutter.dev/) 
 
 使用flutter构建的西北民族大学综合软件，支持的软件包括民大一点通，民大青年
-后端依赖于民大一点通，民大青年，[api.isatidis.top](https://isatidis.top/)
+
+后端依赖于民大一点通，民大青年，[api.isatidis.top](https://github.com/Isatidia/Klee-3DES)
 
 目前支持Android，Windows端;其他端暂未验证可用性
 
@@ -38,6 +39,8 @@
 
 使用**Stable频道最新版**的[Flutter SDK](https://docs.flutter.dev/get-started/install)
 
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Isatidia&repo=Klee-3DES)](https://github.com/Isatidia/Klee-3DES)
+
 ## Thanks
 
 ### dependencies
@@ -60,7 +63,7 @@
 
 本项目仍在持续开发中, 以下屏幕截图可能并非来自最新版本
 ### 手机
-<img src="screenshots/1.jpg" style="width: 200px"><img src="screenshots/2.jpg" style="width: 200px"><img src="screenshots/3.jpg" style="width: 200px"><img src="screenshots/4.jpg" style="width: 150px"><img src="screenshots/5.jpg" style="width: 150px">
+<img src="https://cc.isatidis.top/screenshots/1.jpg" style="width: 200px"><img src="https://cc.isatidis.top/screenshots/2.jpg" style="width: 200px"><img src="https://cc.isatidis.top/screenshots/3.jpg" style="width: 200px"><img src="https://cc.isatidis.top/screenshots/4.jpg" style="width: 200px"><img src="https://cc.isatidis.top/screenshots/5.jpg" style="width: 200px">
 ## 已知问题
  - 在登录界面登录成功后，由于继承了父组件的属性，返回主页会自动唤起键盘
  - 启动应用有概率长时间白屏，如无法使用，请联系作者
