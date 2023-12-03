@@ -1,8 +1,8 @@
-import 'package:Klee/HomePageTools/ActivityPage.dart';
-import 'package:Klee/login/login.dart';
+import 'package:klee/Tools/HomePageTools/ActivityPage.dart';
+import 'package:klee/login/login.dart';
 import 'package:flutter/material.dart';
-import 'package:Klee/HomePageTools/DataPage.dart';
-import 'package:Klee/HomePageTools/PayCode.dart';
+import 'package:klee/Tools/HomePageTools/DataPage.dart';
+import 'package:klee/Tools/HomePageTools/PayCode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,25 +15,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Text(
           '首页',
-          style: TextStyle(
-              color: Color.fromARGB(150, 40, 40, 40),
-              //fontFamily: "font2",
-              fontSize: 20,
-              fontWeight: FontWeight.w700),
         ),
-        backgroundColor: Colors.transparent, // 设置背景颜色为透明
-        elevation: 0,
       ),
       body: MePage(),
     );
   }
 }
 
-//
-//
 class HomePageHello extends StatelessWidget {
   HomePageHello({super.key});
   String time() {
@@ -158,7 +148,6 @@ class _MePageButtonState extends State<MePageButton> {
   @override
   Widget build(BuildContext context) {
     double padding = 10.0;
-
     return Padding(
       padding: EdgeInsets.fromLTRB(padding, 8, padding, 8),
       child: MouseRegion(
@@ -176,14 +165,16 @@ class _MePageButtonState extends State<MePageButton> {
               height: 150,
               child: AnimatedContainer(
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(24)),
-                  color: hovering
-                      ? Theme.of(context)
-                          .colorScheme
-                          .inversePrimary
-                          .withAlpha(50)
-                      : Color.fromARGB(155, 174, 205, 217).withAlpha(40),
-                ),
+                    borderRadius: const BorderRadius.all(Radius.circular(24)),
+                    color: hovering
+                        ? Theme.of(context)
+                            .colorScheme
+                            .inversePrimary
+                            .withAlpha(70)
+                        : Theme.of(context)
+                            .colorScheme
+                            .inversePrimary
+                            .withAlpha(50)),
                 duration: const Duration(milliseconds: 300),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),

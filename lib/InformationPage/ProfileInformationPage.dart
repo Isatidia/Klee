@@ -13,13 +13,7 @@ class ProfileInformationPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "个人信息",
-          style: TextStyle(
-              //fontFamily: "font2",
-              fontSize: 21,
-              fontWeight: FontWeight.w600),
         ),
-        backgroundColor: Color.fromARGB(168, 139, 192, 188), // 设置背景颜色为透明
-        elevation: 0,
       ),
       body: Center(
         child: ProfileInformationBody(),
@@ -169,12 +163,8 @@ Future<void> GetPersonalInformation() async {
     Information.put('imageUrl', imageUrl);
     Information.put('identityTypeName', identityTypeName);
     Information.put('userName', userName);
-
-    print('${Information.get('username')}');
-    print('${Information.get('userName')}');
-    print('${Information.get('organizationName')}');
-    print('${Information.get('identityTypeName')}');
-    print('${Information.get('imageUrl')}');
+    Information.put('userName', userName);
+    Information.put('ActivityRegisterMessages', "默认:报名");
   } else {
     print("请求失败");
   }

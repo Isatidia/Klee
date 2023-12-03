@@ -1,8 +1,8 @@
-import 'package:Klee/login/login.dart';
+import 'package:klee/login/login.dart';
 import 'package:flutter/material.dart';
-import 'package:Klee/InformationPage/SettingsPage.dart';
+import 'package:klee/InformationPage/SettingsPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Klee/InformationPage/ProfileInformationPage.dart';
+import 'package:klee/InformationPage/ProfileInformationPage.dart';
 
 //import 'package:shared_preferences/shared_preferences.dart';
 class InformationPageBody extends StatelessWidget {
@@ -63,111 +63,113 @@ class InformationPage extends StatelessWidget {
         children: [
           ProfilePic(),
           SizedBox(height: 20),
-          ProfileMenu(
+          ProfileCard(
             text: "用户信息",
             icon: Icons.account_box,
-            press: () => {
-              determinePageToNavigate().then((page) {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => page,
-                ));
-              })
-            },
+            onPressed: () => navigateToPage(context),
           ),
-          ProfileMenu(
+          ProfileCard(
             text: "设置",
             icon: Icons.settings_rounded,
-            press: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => SettingsPage(),
-              ));
-            },
+            onPressed: () => navigateToSettingsPage(context),
           ),
-          ProfileMenu(
+          ProfileCard(
             text: "登出",
             icon: Icons.exit_to_app,
-            press: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text('确认登出？'),
-                    content: Text('您确定要登出吗？'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop(); // 关闭弹窗
-                        },
-                        child: Text('取消'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          SelectAllInformation();
-                          // 记得写处理登出逻辑
-                          //删除所有信息，单独用一个函数
-                          Navigator.of(context).pop(); // 关闭弹窗
-                        },
-                        child: Text('确认'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
+            onPressed: () => showLogoutDialog(context),
           ),
         ],
       ),
     );
   }
+
+  void navigateToPage(BuildContext context) {
+    determinePageToNavigate().then((page) {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => page,
+      ));
+    });
+  }
+
+  void navigateToSettingsPage(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => SettingsPage(),
+    ));
+  }
+
+  void showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('确认登出？'),
+          content: Text('您确定要登出吗？'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('取消'),
+            ),
+            TextButton(
+              onPressed: () {
+                SelectAllInformation();
+                Navigator.of(context).pop();
+                final snackBar = SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  margin: EdgeInsets.fromLTRB(22, 0, 22, 15),
+                  content: Row(
+                    children: [
+                      Icon(
+                        Icons.check,
+                        color: Colors.white,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        "登出成功",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 15),
+                      ),
+                    ],
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+              child: Text('确认'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
-class ProfileMenu extends StatelessWidget {
-  const ProfileMenu({
+class ProfileCard extends StatelessWidget {
+  const ProfileCard({
     Key? key,
     required this.text,
     required this.icon,
-    this.press,
-    this.textColor = const Color.fromARGB(200, 0, 0, 0),
-    this.iconColor = const Color.fromARGB(200, 0, 0, 0),
+    required this.onPressed,
   }) : super(key: key);
 
   final String text;
   final IconData icon;
-  final VoidCallback? press;
-  final Color textColor;
-  final Color iconColor;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 9),
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: TextButton(
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.all(23),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          backgroundColor: Color.fromARGB(40, 179, 225, 236),
-        ),
-        onPressed: press,
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              size: 28,
-              color: iconColor, // 设置图标颜色
-            ),
-            SizedBox(width: 20),
-            Expanded(
-              child: Text(
-                text,
-                style: TextStyle(color: textColor), // 设置文字颜色
-              ),
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: Color.fromARGB(143, 40, 40, 40),
-            ),
-          ],
+        onPressed: onPressed,
+        child: ListTile(
+          leading: Icon(
+            icon,
+            size: 28,
+          ),
+          title: Text(text),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
       ),
     );
