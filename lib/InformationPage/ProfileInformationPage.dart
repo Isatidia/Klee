@@ -170,7 +170,7 @@ Future<void> GetPersonalInformation() async {
   }
 }
 
-//获取个人头像
+//获取个人头像和id
 Future<String> GetPersonalImage() async {
   Future<String> getTokenCookieJSESSIONI() async {
     SharedPreferences Token = await SharedPreferences.getInstance();
@@ -190,10 +190,10 @@ Future<String> GetPersonalImage() async {
     // 解析JSON字符串
     Map<String, dynamic> jsonData = json.decode(responseImage.body);
     String avatarUrl = jsonData['data']['avatar'];
-    print(avatarUrl);
-    //Hive.init('Data');
+    String cardAccount = jsonData['data']['cardAccount'].toString();
     var Information = await Hive.openBox('DataBox');
     Information.put('avatarUrl', avatarUrl);
+    Information.put('cardAccount', cardAccount);
     return avatarUrl;
   } else {
     print('头像获取失败');
