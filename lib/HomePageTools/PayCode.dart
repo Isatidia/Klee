@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -9,21 +10,7 @@ class PayCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '付款码',
-          style: TextStyle(
-              color: Color.fromARGB(150, 40, 40, 40),
-              fontSize: 20,
-              fontWeight: FontWeight.w700),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: const Color.fromARGB(
-              255, 153, 153, 153), // Set the arrow color to gray
-        ),
-      ),
+      appBar: AppBar(title: Text('付款码')),
       body: RefreshCode(),
     );
   }
@@ -126,8 +113,7 @@ class _ShowPayCodeState extends State<ShowPayCode> {
   }
 
   Future<void> _getBalance() async {
-    // 调用 GetBalance() 函数来获取余额数据
-    double balance = await GetBalance(); // 假设 GetBalance() 是一个异步函数
+    double balance = await GetBalance();
     setState(() {
       _balance = balance;
     });
@@ -135,12 +121,13 @@ class _ShowPayCodeState extends State<ShowPayCode> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double screenWidthRow = mediaQueryData.size.width;
     return Container(
       margin: EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Color.fromARGB(40, 40, 40, 40),
-        // Updated background color
-        borderRadius: BorderRadius.circular(16), // Add a border radius
+        borderRadius: BorderRadius.circular(16),
       ),
       padding: EdgeInsets.all(25),
       child: FutureBuilder<String>(
@@ -164,7 +151,7 @@ class _ShowPayCodeState extends State<ShowPayCode> {
                     child: QrImageView(
                       data: snapshot.data ?? '',
                       version: QrVersions.auto,
-                      size: 250.0,
+                      size: screenWidthRow * 2 / 3,
                     ),
                   ),
                   SizedBox(height: 16),
@@ -284,10 +271,13 @@ void paycodetoken(String cookie) async {
 
 //获取一组付款码
 Future<String> getpaycode(String synjonesAuth) async {
+  var Information = Hive.box('DataBox');
+  String? cardAccount = Information.get('cardAccount');
+  print(cardAccount);
   var request = http.Request(
       'GET',
       Uri.parse(
-          'https://ykt.xbmu.edu.cn/berserker-app/ykt/tsm/batchGetBarCodeGet?account=31779&payacc=000&paytype=1&synAccessSource=wechat-mp&synjones-auth=$synjonesAuth'));
+          'https://ykt.xbmu.edu.cn/berserker-app/ykt/tsm/batchGetBarCodeGet?account=$cardAccount&payacc=000&paytype=1&synAccessSource=wechat-mp&synjones-auth=$synjonesAuth'));
 
   var response = await http.Client().send(request);
   var responseBody = await http.Response.fromStream(response);
@@ -346,7 +336,7 @@ Future<String> getfirstpaycode() async {
   }
 
   String synjonesAuth = await getsynjonesAuth();
-  //print(synjonesAuth);
+  print(synjonesAuth);
   //GetBalance();
   String FirstPayCode = await getpaycode(synjonesAuth);
   if (FirstPayCode != 'Fail') {
