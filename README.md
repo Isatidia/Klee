@@ -33,7 +33,7 @@
 #### 民大教务：
  - 新建文件夹
 #### App
- - 应用主题选择
+ - 应用全局主题选择
 ### 其他：欢迎提出建议
 - [QQ群:](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=jBzF3oGkYB4v6_ILyh3IMBTePJs2x2E3&authKey=Xx608ZC7WxTRKj3RGI628sBTVhHFe2i6bfVEwdnii5lmxkmsZLUFP%2Bnzn3fk%2F0QU&noverify=0&group_code=929874130/)929874130 
 
